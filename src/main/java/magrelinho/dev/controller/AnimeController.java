@@ -7,12 +7,17 @@ import magrelinho.dev.requests.AnimePostRequestBody;
 import magrelinho.dev.requests.AnimePutRequestBody;
 import magrelinho.dev.service.AnimeService;
 import magrelinho.dev.util.DateUtil;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("animes") //melhoria do caminho
@@ -24,23 +29,26 @@ public class AnimeController {
     private final AnimeService animeService;
 
     @GetMapping
-    public ResponseEntity<List<Anime>> list() {
+    public ResponseEntity<Page<Anime>> list(Pageable pageable) {
         log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 
-        return ResponseEntity.ok(animeService.listAll());
+        return ResponseEntity.ok(animeService.listAll(pageable));
     }
 
-    //@RequestMapping(method = RequestMethod.GET, path = "list") forma ultrapassada de se fazer rotas
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable long id) {
         return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
     }
 
-//  @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/find")
+    public ResponseEntity<List<Anime>> findByName(@RequestParam(required = false) String name) {
+        return ResponseEntity.ok(animeService.findByName(name));
+    }
+
 
     @PostMapping
-    public ResponseEntity<Anime> save(@RequestBody AnimePostRequestBody animePostRequestBody) {
+    public ResponseEntity<Anime> save(@RequestBody @Valid AnimePostRequestBody animePostRequestBody) {
         return new  ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
     }
 

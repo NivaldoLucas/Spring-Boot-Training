@@ -1,44 +1,52 @@
 package magrelinho.dev.service;
 
-import lombok.RequiredArgsConstructor;
-import magrelinho.dev.domain.Anime;
-import magrelinho.dev.repository.AnimeRepository;
-import magrelinho.dev.requests.AnimePostRequestBody;
-import magrelinho.dev.requests.AnimePutRequestBody;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
-
+import lombok.RequiredArgsConstructor;
+import magrelinho.dev.domain.Anime;
+import magrelinho.dev.exception.BadRequestException;
+import magrelinho.dev.mapper.AnimeMapper;
+import magrelinho.dev.repository.AnimeRepository;
+import magrelinho.dev.requests.AnimePostRequestBody;
+import magrelinho.dev.requests.AnimePutRequestBody;
 
 @Service
 @RequiredArgsConstructor
 public class AnimeService {
 
-
     private final AnimeRepository animeRepository;
 
-    public List<Anime> listAll() {
-        return animeRepository.findAll();
+    public Page<Anime> listAll(Pageable pageable) {
+        return animeRepository.findAll(pageable);
     }
+
+    public List<Anime> findByName(String name) {
+        return animeRepository.findByName(name);
+    }
+
 
     public Anime findByIdOrThrowBadRequestException(Long id) {
-        return  animeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
+        return animeRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException( "Anime not Found"));
     }
 
+    @Transactional
     public Anime save(AnimePostRequestBody animePostRequestBody) {
-        return animeRepository.save(Anime.builder().name(animePostRequestBody.getName()).build());
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
     public void replace(AnimePutRequestBody animePutRequestBody) {
         Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
-        Anime anime = Anime.builder()
-                .id(savedAnime.getId())
-                .name(animePutRequestBody.getName())
-                .build();
+        Anime anime = AnimeMapper.INSTANCE.toAnime(animePutRequestBody);
+        anime.setId(savedAnime.getId());
         animeRepository.save(anime);
     }
 
