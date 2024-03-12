@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("animes") //melhoria do caminho
@@ -33,6 +34,12 @@ public class AnimeController {
         log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 
         return ResponseEntity.ok(animeService.listAll(pageable));
+    }
+    
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<Anime>> listAll() {
+        log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        return ResponseEntity.ok(animeService.listAllNonPageable());
     }
 
 

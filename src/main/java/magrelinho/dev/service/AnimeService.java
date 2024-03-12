@@ -23,15 +23,19 @@ import magrelinho.dev.requests.AnimePutRequestBody;
 public class AnimeService {
 
     private final AnimeRepository animeRepository;
-
+    
     public Page<Anime> listAll(Pageable pageable) {
         return animeRepository.findAll(pageable);
+    }
+    
+    public List<Anime> listAllNonPageable() {
+        return animeRepository.findAll();
     }
 
     public List<Anime> findByName(String name) {
         return animeRepository.findByName(name);
     }
-
+    
 
     public Anime findByIdOrThrowBadRequestException(Long id) {
         return animeRepository.findById(id)
@@ -53,5 +57,6 @@ public class AnimeService {
     public void delete(long id) {
         animeRepository.delete(findByIdOrThrowBadRequestException(id));
     }
+
 
 }
