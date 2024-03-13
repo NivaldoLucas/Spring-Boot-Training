@@ -47,13 +47,37 @@ public class SpringClient {
         
         Anime pokemon = Anime.builder().name("Pokemon Fire Red").build();
         ResponseEntity<Anime> pokemonSaved = new RestTemplate().exchange("http://localhost:8080/animes/",
-                            HttpMethod.POST,
-                            new HttpEntity<>(pokemon, createJsonHeader()),
-                             Anime.class);
+                HttpMethod.POST,
+                new HttpEntity<>(pokemon, createJsonHeader()),
+                Anime.class);
 
         log.info("Saved anime {}", pokemonSaved);
 
+
+
+        Anime animeToBeUpdated = pokemonSaved.getBody();
+        animeToBeUpdated.setName("pokemon Leaf Green");
+
+        ResponseEntity<Void> pokemonUpdated = new RestTemplate().exchange("http://localhost:8080/animes/",
+                HttpMethod.PUT,
+                new HttpEntity<>(animeToBeUpdated, createJsonHeader()),
+                Void.class);
+
+        log.info(pokemonUpdated);
+
+
+        ResponseEntity<Void> pokemonDeleted = new RestTemplate().exchange("http://localhost:8080/animes/{id}",
+                HttpMethod.DELETE,
+                null,
+                Void.class,
+                animeToBeUpdated.getId());
+
+        log.info(pokemonUpdated);
+
+
+
         
+
 
     }
 
