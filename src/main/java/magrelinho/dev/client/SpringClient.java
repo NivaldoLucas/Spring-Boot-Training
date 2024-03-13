@@ -6,7 +6,10 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,8 +44,23 @@ public class SpringClient {
         // Anime cowboy = Anime.builder().name("cowboy").build();
         // Anime cowboySaved = new RestTemplate().postForObject("http://localhost:8080/animes/", cowboy, Anime.class);
         // log.info("Saved anime {}", cowboySaved);
+        
+        Anime pokemon = Anime.builder().name("Pokemon Fire Red").build();
+        ResponseEntity<Anime> pokemonSaved = new RestTemplate().exchange("http://localhost:8080/animes/",
+                            HttpMethod.POST,
+                            new HttpEntity<>(pokemon, createJsonHeader()),
+                             Anime.class);
+
+        log.info("Saved anime {}", pokemonSaved);
 
         
 
+    }
+
+    private static HttpHeaders createJsonHeader(){
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        
+        return httpHeaders;
     }
 }
