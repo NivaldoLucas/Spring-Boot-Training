@@ -16,3 +16,12 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+
+security:
+  oauth2:
+    client:
+      scope: password
+      clientId: magrelinho
+      clientSecret: magrelinho
+      accessTokenUri: http://localhost:8080/oauth/token
+

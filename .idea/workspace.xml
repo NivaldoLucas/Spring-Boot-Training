@@ -8,8 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c4b3b9c8-e43f-4135-86cc-13394839ee49.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c4b3b9c8-e43f-4135-86cc-13394839ee49.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/magrelinho/dev/requests/AnimePutRequestBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/magrelinho/dev/requests/AnimePutRequestBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/magrelinho/dev/service/AnimeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/magrelinho/dev/service/AnimeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/magrelinho/dev/repository/AnimeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/magrelinho/dev/repository/AnimeRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +46,7 @@
   "keyToString": {
     "Docker.docker-compose.yml.db: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "JUnit.AnimeRepositoryTest.save_PersistAnime_WhenSuccessful.executor": "Run",
     "Maven.springboot2-essentials [clean].executor": "Run",
     "Maven.springboot2-essentials [install].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -81,7 +81,23 @@
       <recent name="magrelinho.dev.requests" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApplicationStart">
+  <component name="RunManager" selected="JUnit.AnimeRepositoryTest.save_PersistAnime_WhenSuccessful">
+    <configuration name="AnimeRepositoryTest.save_PersistAnime_WhenSuccessful" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot2-essentials" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="magrelinho.dev.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="magrelinho.dev.repository" />
+      <option name="MAIN_CLASS_NAME" value="magrelinho.dev.repository.AnimeRepositoryTest" />
+      <option name="METHOD_NAME" value="save_PersistAnime_WhenSuccessful" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApplicationStart" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="springboot2-essentials" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="magrelinho.dev.ApplicationStart" />
@@ -124,6 +140,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AnimeRepositoryTest.save_PersistAnime_WhenSuccessful" />
         <item itemvalue="Spring Boot.ApplicationStart" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.db: Compose Deployment" />
@@ -156,11 +173,22 @@
       <workItem from="1706531039972" duration="2737000" />
       <workItem from="1706539275005" duration="684000" />
       <workItem from="1706543802292" duration="631000" />
+      <workItem from="1710416446123" duration="1296000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
